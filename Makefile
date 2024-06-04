@@ -7,7 +7,7 @@ LINK := -lm -lncurses
 CC := gcc
 
 TESTS := ./tests
-TEST_TARGETS := *
+TEST_TARGETS := testLib_test
 
 OBJ := ./objs/*
 
@@ -19,8 +19,8 @@ test: all_tests
 
 all_tests: $(addprefix $(TESTS)/bin/, $(TEST_TARGETS))
 
-$(TESTS)/bin/%_test: $(TESTS)/utestC.c $(TESTS)/%_test.c $(OBJ)
-	$(CC) $(INC) $^ $(LINK) -g -o $@
+$(TESTS)/bin/%_test: utestC.c $(TESTS)/%_test.c #$(OBJ)
+	$(CC) -I utestC.h $^ $(LINK) -g -o $@
 
 clean:
 	rm -rf $(OBJS)/*.o $(BIN)/*
